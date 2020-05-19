@@ -1,9 +1,7 @@
-import java.util.Stack;
-
 public class Solution {
     public boolean isValid(String s) {
 
-        Stack<Character> stack = new Stack<>();
+        ArrayStack<Character> stack = new ArrayStack<>();
 
         for (int i = 0; i < s.length(); i++) {
             char c = s.charAt(i);
@@ -35,5 +33,6 @@ public class Solution {
         Solution solution = new Solution();
 
         System.out.println(solution.isValid("{哈哈()[阿松大]}"));
+        System.out.println(solution.isValid("()({}[])[]{}"));
     }
 }

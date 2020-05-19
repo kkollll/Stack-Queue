@@ -169,7 +169,7 @@ public class Array<E> {
         size--;
         data[size] = null; // loitering objects != memory leak
 
-        if (size <= data.length / 4 && data.length != 0) { //复杂度震荡 Lazy处理
+        if (size == data.length / 4 && data.length != 0) { //复杂度震荡 Lazy处理
             resize(data.length / 2);
         }
         return ret;

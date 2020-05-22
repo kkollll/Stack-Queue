@@ -72,9 +72,7 @@ public class Array<E> {
             throw new IllegalArgumentException("add failed. Require index >= 0 and index <= size.");
         }
 
-        for (int i = size - 1; i >= index; i--) {
-            data[i + 1] = data[i];
-        }
+        System.arraycopy(data, index, data, index + 1, size - index);
         data[index] = e;
         size++;
     }
@@ -85,9 +83,7 @@ public class Array<E> {
      */
     private void resize(int newCapacity) {
         E[] newData = (E[])new Object[newCapacity];
-        for (int i = 0; i < size; i++) {
-            newData[i] = data[i];
-        }
+        System.arraycopy(data, 0, newData, 0, size);
         data = newData;
     }
 
@@ -163,9 +159,7 @@ public class Array<E> {
 
         E ret = data[index];
 
-        for (int i = index + 1; i < size; i++) {
-            data[i - 1] = data[i];
-        }
+        System.arraycopy(data, index + 1, data, index, size - (index + 1));
         size--;
         data[size] = null; // loitering objects != memory leak
 

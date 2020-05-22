@@ -1,19 +1,40 @@
+import java.util.Random;
+
 public class Main {
 
-    public static void main(String[] args) {
+    /**
+     * 测试使用q运行opCount个enqueue和dequeue操作所需要的时间，单位：秒
+     * @param q 队列
+     * @param opCount
+     * @return
+     */
+    private static double testQueue(Queue<Integer> q, int opCount) {
+        long startTime = System.nanoTime();
 
-        ArrayStack<Integer> stack = new ArrayStack<>();
+        Random random = new Random();
 
-        for (int i = 0; i < 10; i++) {
-            stack.push(i);
+        for (int i = 0; i < opCount; i++) {
+            q.enqueue(random.nextInt(Integer.MAX_VALUE));
         }
-        System.out.println(stack);
+        for (int i = 0; i < opCount; i++) {
+            q.dequeue();
+        }
 
-        stack.pop();
+        long endTime = System.nanoTime();
 
-        System.out.println(stack);
+        return(endTime - startTime) / 1000000000.0;
+    }
 
-        System.out.println(stack.peek());
+    public static void main(String[] args) {
+ 
+        int opCount = 100000;
 
+        ArrayQueue<Integer> arrayQueue = new ArrayQueue<>();
+        double time1 = testQueue(arrayQueue, opCount);
+
+        LoopQueue<Integer> loopQueue = new LoopQueue<>();
+        double time2 = testQueue(loopQueue, opCount);
+
+        System.out.println("time1: " + time1 + ", time2: " + time2);
     }
 }
